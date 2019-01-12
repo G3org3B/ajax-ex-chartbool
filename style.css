@@ -3,10 +3,11 @@
   margin: 0;
   box-sizing: border-box;
 }
-.continer {
-  width: 100vh;
+.container {
+  width: 80%;
   height: 100%;
-  background: lightcoral;
+  margin: auto;
+  background: #00DB5E;
 }
 .items {
   width: 500px;
