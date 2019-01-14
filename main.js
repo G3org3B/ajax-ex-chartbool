@@ -47,6 +47,8 @@ function init()
     });
 }
 
+ // creare la funzione per aggiungere le vendite
+
 function addSale(date, amount, salesman)
 {
     $.ajax({
@@ -85,7 +87,7 @@ function printSalesmenSelect(results)
         var vendita = results[i];
 
         // aggiunge all'array il venditore nel caso in cui non sia stato preso e stamparlo a schermo
-        
+
         if (!venditori.includes(vendita.salesman))
         {
             venditori.push(vendita.salesman);
@@ -98,4 +100,75 @@ function printSalesmenSelect(results)
             venditoreSelect.append(template);
         }
     }
+}
+
+// stampare i dati sul grafico a linea
+
+function printLineChart(results)
+{
+    var oggetoVendite = {
+      
+        January: 0,
+        February: 0,
+        March: 0,
+        April: 0,
+        May: 0,
+        June: 0,
+        July: 0,
+        August: 0,
+        September: 0,
+        October: 0,
+        November: 0,
+        December: 0
+    };
+
+    for (var i = 0; i < results.length; i++) {
+
+        // oggetto della vendita
+
+        var vendita = results[i];
+
+        // ammontare della vendita
+
+        var amount = parseInt(vendita.amount);
+
+        // data della vendita nel formato stringa
+
+        var originalDate = vendita.date;
+
+        // data della vendita in formato moment.js
+
+        var momentDate = moment(originalDate, "DD/MM/YYYY");
+
+        //mese della vendita in formato stringa
+
+        var mese = momentDate.format('MMMM');
+
+
+        oggetoVendite[mese] += amount;
+    }
+
+    var arrayMesi = [];
+    var arrayAmounts = [];
+
+    for (var mese in oggetoVendite) {
+        arrayMesi.push(mese);
+        arrayAmounts.push(oggetoVendite[mese]);
+    }
+
+    console.log(arrayMesi);
+    console.log(arrayAmounts);
+
+    var chart = new Chart($('#line'), {
+        type: 'line',
+        data: {
+            labels: arrayMesi,
+            datasets: [{
+                label: "Vendite dell'azienda",
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: arrayAmounts,
+            }]
+        }
+    });
 }
