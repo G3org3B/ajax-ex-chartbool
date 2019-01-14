@@ -70,16 +70,22 @@ function addSale(date, amount, salesman)
 
 function printSalesmenSelect(results)
 {
-    //creiamo un array vuoto
+    //creare un array vuoto
+
     var venditori = [];
-    //prendiamo il selettore
+
+    //prendere il selettore con jquery
+
     var venditoreSelect = $('#venditore');
 
-    //facciamo un ciclo per andare a vedere ogni vendita e prendere ogni venditore
+    //creare e fare un ciclo per vedere tutte le vendite e prendere ogni venditore
+
     for (var i = 0; i < results.length; i++) {
+
         var vendita = results[i];
 
-        //se non ho ancora preso questo venditore, lo aggiungo all'array e lo stampo a schermo
+        // aggiunge all'array il venditore nel caso in cui non sia stato preso e stamparlo a schermo
+        
         if (!venditori.includes(vendita.salesman))
         {
             venditori.push(vendita.salesman);
