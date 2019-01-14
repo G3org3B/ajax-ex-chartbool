@@ -67,3 +67,29 @@ function addSale(date, amount, salesman)
         }
     });
 }
+
+function printSalesmenSelect(results)
+{
+    //creiamo un array vuoto
+    var venditori = [];
+    //prendiamo il selettore
+    var venditoreSelect = $('#venditore');
+
+    //facciamo un ciclo per andare a vedere ogni vendita e prendere ogni venditore
+    for (var i = 0; i < results.length; i++) {
+        var vendita = results[i];
+
+        //se non ho ancora preso questo venditore, lo aggiungo all'array e lo stampo a schermo
+        if (!venditori.includes(vendita.salesman))
+        {
+            venditori.push(vendita.salesman);
+
+            var template = $('.templates option').clone();
+
+            template.val(vendita.salesman);
+            template.html(vendita.salesman);
+
+            venditoreSelect.append(template);
+        }
+    }
+}
