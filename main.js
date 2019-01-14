@@ -107,7 +107,7 @@ function printSalesmenSelect(results)
 function printLineChart(results)
 {
     var oggetoVendite = {
-      
+
         January: 0,
         February: 0,
         March: 0,
@@ -169,6 +169,49 @@ function printLineChart(results)
                 borderColor: 'rgb(255, 99, 132)',
                 data: arrayAmounts,
             }]
+        }
+    });
+}
+
+// stampare i dati su di un grafico a torta
+
+function printPieChart(results)
+{
+    var processedObj = {};
+    var fatturatoTotale = 0;
+
+    for (var i = 0; i < results.length; i++) {
+        var vendita = results[i];
+        var venditore = vendita.salesman;
+        var amount = parseInt(vendita.amount);
+
+        if (processedObj[venditore] == undefined)
+        {
+            processedObj[venditore] = 0;
+        }
+
+        processedObj[venditore] += amount;
+        fatturatoTotale += amount;
+    }
+
+    var arrayLabels = [];
+    var arrayAmounts = [];
+
+    for (var nomeVenditore in processedObj) {
+        var percentualeFatturato = processedObj[nomeVenditore] / fatturatoTotale * 100;
+        console.log(percentualeFatturato);
+
+        arrayLabels.push(nomeVenditore);
+        arrayAmounts.push(percentualeFatturato.toFixed(2));
+    }
+
+    var myPieChart = new Chart($('#pie'), {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: arrayAmounts
+            }],
+            labels: arrayLabels
         }
     });
 }
