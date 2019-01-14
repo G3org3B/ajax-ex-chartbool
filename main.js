@@ -6,7 +6,8 @@ $(document).ready(function() {
 
     addButton.click(function() {
 
-        //data in format YYYY-MM-DD
+        //data in formato YYYY-MM-DD
+
         var date = $('#date').val();
         var newDate = moment(date).format('DD/MM/YYYY');
         var amount = parseInt($('#amount').val());
@@ -105,7 +106,7 @@ function printSalesmenSelect(results)
 // stampare i dati sul grafico a linea
 
 function printLineChart(results)
-{
+ {
     var oggetoVendite = {
 
         January: 0,
@@ -206,12 +207,22 @@ function printPieChart(results)
     }
 
     var myPieChart = new Chart($('#pie'), {
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: arrayAmounts
-            }],
-            labels: arrayLabels
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: arrayAmounts,
+          labels: arrayLabels,
+          backgroundColor: [
+           'rgba(255, 99, 132)',
+           'rgba(54, 162, 235)',
+           'rgba(255, 206, 86)',
+           'rgba(75, 192, 192)',
+           'rgba(153, 102, 255)',
+           'rgba(255, 159, 64)'
+          ],
+        }],
+
+      labels: arrayLabels,
         }
     });
 }
